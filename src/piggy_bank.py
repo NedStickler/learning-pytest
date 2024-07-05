@@ -8,6 +8,9 @@ class PiggyBank:
         self.__savings = savings["amount"]
     
     def __str__(self) -> str:
+        return f"There are {self.__savings} in this piggy bank."
+
+    def __repr__(self) -> str:
         return f"PiggyBank(savings={self.savings})"
     
     def _save(self) -> None:
@@ -34,3 +37,7 @@ class PiggyBank:
     def empty(self) -> None:
         self.__savings = 0
         self._save()
+    
+if __name__ == "__main__":
+    pb = PiggyBank()
+    print(str(pb))
