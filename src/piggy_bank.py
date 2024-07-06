@@ -8,7 +8,7 @@ class PiggyBank:
         self.__savings = savings["amount"]
     
     def __str__(self) -> str:
-        return f"There are {self.__savings} in this piggy bank."
+        return f"There are £{self.__savings} in this piggy bank."
 
     def __repr__(self) -> str:
         return f"PiggyBank(savings={self.savings})"
@@ -23,21 +23,25 @@ class PiggyBank:
     
     @savings.setter
     def savings(self, savings: float) -> None:
+        if savings < 0:
+            raise ValueError("Cannot set savings to a negative value.")
         self.__savings = savings
         self._save()
     
     def add(self, add: float) -> None:
+        if add < 0:
+            raise ValueError("Cannot add a negative amount.")
         self.__savings += add
         self._save()
     
     def remove(self, remove: float) -> None:
+        if remove < 0:
+            raise ValueError("Cannot remove a negative amount.")
+        if self.__savings - remove < 0:
+            raise ValueError(f"Insufficient funds to remove £{remove}.")
         self.__savings -= remove
         self._save()
     
     def empty(self) -> None:
         self.__savings = 0
         self._save()
-    
-if __name__ == "__main__":
-    pb = PiggyBank()
-    print(str(pb))
